@@ -1,15 +1,28 @@
+import java.io.IOException;
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Main {
+    static String path = ("resources/m.20210");
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Scanner scanner = new Scanner(System.in);
+        MonthlyReport monthlyReport = new MonthlyReport();
+        YearlyReport yearlyReport = new YearlyReport();
+
         while (true) {
             printMenu();
             String command = scanner.next();
             if (command.equals("1")) {
-
+                for (int i = 1;i < 4; i++) {
+                    monthlyReport.readFileContents(path + i + ".csv");
+                }
             }
             else if (command.equals("2")) {
 
@@ -45,6 +58,11 @@ public class Main {
             System.out.println("5 - Вывести информацию о годовом отчёте");
             System.out.println("q - Выход");
         }
+    public enum Month {
+        Январь,
+        Февраль,
+        Март
+    }
     }
 
 
