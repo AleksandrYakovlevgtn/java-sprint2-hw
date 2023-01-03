@@ -10,19 +10,23 @@ import java.util.ArrayList;
 public class Main {
     static String path = ("resources/m.20210");
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
+        YearlyReport yearlyReport = new YearlyReport("resources/y.2021.csv");
         MonthlyReport monthlyReport = new MonthlyReport();
-        YearlyReport yearlyReport = new YearlyReport();
+        for (int i = 1; i < 4; i++) {
+            monthlyReport.loudFile("resources/m.20210"+ i +".csv");
+        }
+        Checker checker = new Checker(monthlyReport, yearlyReport);
+        boolean result = checker.check();
 
         while (true) {
             printMenu();
             String command = scanner.next();
             if (command.equals("1")) {
-                for (int i = 1;i < 4; i++) {
-                    monthlyReport.readFileContents(path + i + ".csv");
-                }
+
+
             }
             else if (command.equals("2")) {
 

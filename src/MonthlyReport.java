@@ -11,10 +11,12 @@ public class MonthlyReport {
     Boolean is_expense;
     Integer quantity;
     Integer sum_of_one;
-    List <String> readFileContents= new ArrayList<>();
-    String line;
-    //String[] lineContents = line.split(",");
+public MonthlyReport(){
 
+}
+void loudFile(String path){
+
+}
 
 
 
