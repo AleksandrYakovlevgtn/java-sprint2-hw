@@ -37,6 +37,11 @@ public class Main {
                 System.out.println("Доходы за год составили: " + YearlyReport.income);
                 System.out.println("Доходы по месяцам: " + YearlyReport.incomeInYear);
                 System.out.println("Расходы за год составили:" + YearlyReport.expense);
+                System.out.println("Расходы по месяцам: " + YearlyReport.expenseInYear);
+                System.out.println("Средний доход за месяц равен: " + YearlyReport.income/12);
+                System.out.println("Средний расход за месяц равен: " + YearlyReport.expense/12);
+                YearlyReport.getMaxIncomeMonth();
+                YearlyReport.maxExpenseMonth();
             }
             else if (command.equals("q")) {
                  break;

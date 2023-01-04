@@ -3,14 +3,17 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class YearlyReport {
     public static String[] months = {"Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"};
     public static ArrayList<DataYear> datas = new ArrayList<>();
     public static HashMap<Integer, Integer> incomeInYear = new HashMap<>();
-    public static HashMap<String, Integer> expenseInYear = new HashMap<>();
+    public static HashMap<Integer, Integer> expenseInYear = new HashMap<>();
     public static int income;  // доход
     public static int expense; // расход
+
 
     //public static HashMap<Integer, DataYear> dohod = new HashMap<>();
     //public static HashMap<Integer, DataYear> rashod = new HashMap<>();
@@ -37,13 +40,42 @@ public class YearlyReport {
                     incomeInYear.put(data.month, data.amount);
                     income += data.amount;
                 } else {
-                    expenseInYear.put(months[data.month -1], data.amount);
+                    expenseInYear.put(data.month, data.amount);
                     expense += data.amount;
                 }
             }
 
             return 0;
         }
+
+        static void getMaxIncomeMonth(){
+
+           Integer maxIncomeMoth = 0;
+           Integer maxAmount = 0 ;
+
+            for (Map.Entry<Integer,Integer> data : incomeInYear.entrySet()){
+                if(maxAmount < data.getValue()){
+                    maxAmount = data.getValue();
+                    maxIncomeMoth = data.getKey();
+                }
+                    }
+            System.out.println("Месяц с самым большим доходом: " + months[maxIncomeMoth - 1]);
+            }
+        static void maxExpenseMonth(){
+
+            Integer maxExpenseMoth = 0;
+            Integer maxAmount = 0 ;
+
+            for (Map.Entry<Integer,Integer> data : expenseInYear.entrySet()){
+                if(maxAmount < data.getValue()){
+                    maxAmount = data.getValue();
+                    maxExpenseMoth = data.getKey();
+                }
+            }
+            System.out.println("Месяц с самым большим расходом: " + months[maxExpenseMoth - 1]);
+        }
+
+
 
 
         public String readFileContents (String path){
