@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 public class Checker {
     public MonthlyReport monthlyReport;
     public YearlyReport yearlyReport;

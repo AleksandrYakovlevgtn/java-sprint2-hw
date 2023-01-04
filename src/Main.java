@@ -21,12 +21,13 @@ public class Main {
         Checker checker = new Checker(monthlyReport, yearlyReport);
         boolean result = checker.check();
 
+
         while (true) {
             printMenu();
             String command = scanner.next();
             if (command.equals("1")) {
-
-
+               System.out.println(yearlyReport.rashod);
+                System.out.println(yearlyReport.dohod);
             }
             else if (command.equals("2")) {
 
@@ -62,11 +63,6 @@ public class Main {
             System.out.println("5 - Вывести информацию о годовом отчёте");
             System.out.println("q - Выход");
         }
-    public enum Month {
-        Январь,
-        Февраль,
-        Март
-    }
-    }
+}
 
 
