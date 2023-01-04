@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class YearlyReport {
+    public static String[] months = {"Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"};
     public static ArrayList<DataYear> datas = new ArrayList<>();
-    public static HashMap<Integer, Integer> dohodInYear = new HashMap<>();
-    public static HashMap<Integer, Integer> rashodInYear = new HashMap<>();
-    public static int dohod;
+    public static HashMap<String, Integer> incomeInYear = new HashMap<>();
+    public static HashMap<String, Integer> expenseInYear = new HashMap<>();
+    public static int income;  // доход
+    public static int expense; // расход
 
     //public static HashMap<Integer, DataYear> dohod = new HashMap<>();
     //public static HashMap<Integer, DataYear> rashod = new HashMap<>();
@@ -26,22 +28,17 @@ public class YearlyReport {
 
             DataYear data = new DataYear(month, amount, is_expense);
             datas.add(data);
-
-       /* if(is_expense == false )
-            dohod.put(month, datas.get(i - 1));
-        else{
-            rashod.put(month,datas.get(i - 1));
-        }*/
         }
     }
 
-        static int DetailsRashodDahod () {
+        static int DetailsExpenseIncome() {
             for (DataYear data : datas) {
                 if (data.is_expense == false) {
-                    dohodInYear.put(data.month, data.amount);
-                    dohod = dohod + data.amount;
+                    incomeInYear.put(months[data.month -1], data.amount);
+                    income += data.amount;
                 } else {
-                    rashodInYear.put(data.month, data.amount);
+                    expenseInYear.put(months[data.month -1], data.amount);
+                    expense += data.amount;
                 }
             }
 
@@ -51,6 +48,7 @@ public class YearlyReport {
 
         public String readFileContents (String path){
             try {
+                System.out.println("Файл удачно считан.");
                 return Files.readString(Path.of(path));
             } catch (IOException e) {
                 System.out.println("Невозможно прочитать файл с месячным отчётом. Возможно файл не находится в нужной директории.");

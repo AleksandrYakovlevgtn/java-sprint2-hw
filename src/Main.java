@@ -13,9 +13,6 @@ public class Main {
         String path = ("resources/m.20210");
         Scanner scanner = new Scanner(System.in);
 
-        //Checker checker = new Checker(monthlyReport, yearlyReport);
-        //boolean result = checker.check();
-
 
         while (true) {
             printMenu();
@@ -36,8 +33,10 @@ public class Main {
 
             }
             else if (command.equals("5")) {
-                YearlyReport.DetailsRashodDahod();
-                System.out.println(YearlyReport.dohod);
+                YearlyReport.DetailsExpenseIncome();
+                System.out.println("Доходы за год составили: " + YearlyReport.income);
+                System.out.println("Доходы по месяцам: " + YearlyReport.incomeInYear);
+                System.out.println("Расходы за год составили:" + YearlyReport.expense);
             }
             else if (command.equals("q")) {
                  break;
