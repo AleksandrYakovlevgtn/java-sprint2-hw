@@ -8,29 +8,26 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Main {
-    static String path = ("resources/m.20210");
+        public static void main(String[] args) {
 
-    public static void main(String[] args) {
-
+        String path = ("resources/m.20210");
         Scanner scanner = new Scanner(System.in);
-        YearlyReport yearlyReport = new YearlyReport("resources/y.2021.csv");
-        MonthlyReport monthlyReport = new MonthlyReport();
-        for (int i = 1; i < 4; i++) {
-            monthlyReport.loudFile("resources/m.20210"+ i +".csv");
-        }
-        Checker checker = new Checker(monthlyReport, yearlyReport);
-        boolean result = checker.check();
+
+        //Checker checker = new Checker(monthlyReport, yearlyReport);
+        //boolean result = checker.check();
 
 
         while (true) {
             printMenu();
             String command = scanner.next();
             if (command.equals("1")) {
-               System.out.println(yearlyReport.rashod);
-                System.out.println(yearlyReport.dohod);
+                MonthlyReport monthlyReport = new MonthlyReport();
+                for (int i = 1; i < 13; i++) {
+                    monthlyReport.loudFile(path + i +".csv");
+                }
             }
             else if (command.equals("2")) {
-
+                YearlyReport yearlyReport = new YearlyReport("resources/y.2021.csv");
             }
             else if (command.equals("3")) {
 
@@ -39,7 +36,8 @@ public class Main {
 
             }
             else if (command.equals("5")) {
-
+                YearlyReport.DetailsRashodDahod();
+                System.out.println(YearlyReport.dohod);
             }
             else if (command.equals("q")) {
                  break;

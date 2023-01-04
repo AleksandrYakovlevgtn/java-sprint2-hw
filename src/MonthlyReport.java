@@ -3,11 +3,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 
 public class MonthlyReport {
-    ArrayList<DataMonth> dataMonths = new ArrayList<>();
+    public static ArrayList<DataMonth> dataMonths = new ArrayList<>();
+    public static HashMap<Integer, DataMonth> dohod = new HashMap<>();
+    public static HashMap<Integer, DataMonth> rashod = new HashMap<>();
 public MonthlyReport(){
 
 }
@@ -24,6 +27,12 @@ void loudFile(String path){
 
         DataMonth dataMonth = new DataMonth(item_name,is_expenseMonth,quantity,sum_of_one);
         dataMonths.add(dataMonth);
+
+        if(is_expenseMonth == false )
+            dohod.put(i, dataMonths.get(i - 1));
+        else{
+            rashod.put(i,dataMonths.get(i - 1));
+        }
     }
  }
     public String readFileContents(String path) {

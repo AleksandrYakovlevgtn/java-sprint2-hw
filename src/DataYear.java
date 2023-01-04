@@ -1,14 +1,13 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DataYear {
-    static int month;
-    static int amount;
-    static boolean is_expense;
-    public static ArrayList<DataYear> datas;
+    public int month;
+    public int amount;
+    public boolean is_expense;
 
-    static {
-        datas = new ArrayList<>();
-    }
+
+
 
 
     public DataYear(int month, int amount, boolean is_expense) {
