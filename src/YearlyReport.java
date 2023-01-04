@@ -7,7 +7,7 @@ import java.util.HashMap;
 public class YearlyReport {
     public static String[] months = {"Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"};
     public static ArrayList<DataYear> datas = new ArrayList<>();
-    public static HashMap<String, Integer> incomeInYear = new HashMap<>();
+    public static HashMap<Integer, Integer> incomeInYear = new HashMap<>();
     public static HashMap<String, Integer> expenseInYear = new HashMap<>();
     public static int income;  // доход
     public static int expense; // расход
@@ -34,7 +34,7 @@ public class YearlyReport {
         static int DetailsExpenseIncome() {
             for (DataYear data : datas) {
                 if (data.is_expense == false) {
-                    incomeInYear.put(months[data.month -1], data.amount);
+                    incomeInYear.put(data.month, data.amount);
                     income += data.amount;
                 } else {
                     expenseInYear.put(months[data.month -1], data.amount);
