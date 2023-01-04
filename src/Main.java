@@ -33,15 +33,21 @@ public class Main {
 
             }
             else if (command.equals("5")) {
-                YearlyReport.DetailsExpenseIncome();
-                System.out.println("Доходы за год составили: " + YearlyReport.income);
-                System.out.println("Доходы по месяцам: " + YearlyReport.incomeInYear);
-                System.out.println("Расходы за год составили:" + YearlyReport.expense);
-                System.out.println("Расходы по месяцам: " + YearlyReport.expenseInYear);
-                System.out.println("Средний доход за месяц равен: " + YearlyReport.income/12);
-                System.out.println("Средний расход за месяц равен: " + YearlyReport.expense/12);
-                YearlyReport.getMaxIncomeMonth();
-                YearlyReport.maxExpenseMonth();
+                if(!YearlyReport.datas.isEmpty()) {
+                    YearlyReport.DetailsExpenseIncome();
+                    System.out.println();
+                    System.out.println("Доходы за год составили: " + YearlyReport.income);
+                    System.out.println("Доходы по месяцам: " + YearlyReport.incomeInYear);
+                    System.out.println("Расходы за год составили:" + YearlyReport.expense);
+                    System.out.println("Расходы по месяцам: " + YearlyReport.expenseInYear);
+                    System.out.println("Средний доход за месяц равен: " + YearlyReport.income / 12);
+                    System.out.println("Средний расход за месяц равен: " + YearlyReport.expense / 12);
+                    YearlyReport.getMaxIncomeMonth();
+                    YearlyReport.maxExpenseMonth();
+                    System.out.println();
+                }else{
+                    System.out.println("Таблица не считано! Пожалуйста сначало выполните 2 команду. ");
+                }
             }
             else if (command.equals("q")) {
                  break;

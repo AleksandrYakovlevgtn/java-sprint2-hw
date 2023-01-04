@@ -15,10 +15,6 @@ public class YearlyReport {
     public static int expense; // расход
 
 
-    //public static HashMap<Integer, DataYear> dohod = new HashMap<>();
-    //public static HashMap<Integer, DataYear> rashod = new HashMap<>();
-
-
     public YearlyReport(String path) {
         String content = readFileContents(path);
         String[] lines = content.split("\r?\n");
