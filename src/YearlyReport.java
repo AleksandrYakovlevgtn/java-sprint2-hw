@@ -3,19 +3,27 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
-
 public class YearlyReport {
     public static String[] months = {"Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"};
-    public static ArrayList<DataYear> datas = new ArrayList<>();
-    public static HashMap<Integer, Integer> incomeInYear = new HashMap<>();
-    public static HashMap<Integer, Integer> expenseInYear = new HashMap<>();
-    public static int income;  // доход
-    public static int expense; // расход
+    public static ArrayList<DataYear> datas = new ArrayList<>(); // список с данными из файла
+    public static HashMap<Integer, Integer> incomeInYear = new HashMap<>();  // мапа с доходами, ключ это месяц.
+    public static HashMap<Integer, Integer> expenseInYear = new HashMap<>(); // мапа с расходами, ключ это месяц.
+    public static HashMap<Integer, Integer> profitInYear = new HashMap<>();  // мапа с прибылью, ключ это месяц числом.
+    public static int income;  // доход за весь год.
+    public static int expense; // расход за весь год.
+
+    public String readFileContents (String path){  // считываем файл.
+        try {
+            System.out.println("Файл удачно считан.");
+            return Files.readString(Path.of(path));
+        } catch (IOException e) {
+            System.out.println("Невозможно прочитать файл с месячным отчётом. Возможно файл не находится в нужной директории.");
+            return null;
+        }
+    }
 
 
-    public YearlyReport(String path) {
+    public YearlyReport(String path) {    // читаем по линиям и упоковываем в список.
         String content = readFileContents(path);
         String[] lines = content.split("\r?\n");
         for (int i = 1; i < lines.length; i++) {
@@ -30,7 +38,7 @@ public class YearlyReport {
         }
     }
 
-        static int DetailsExpenseIncome() {
+        static int DetailsExpenseIncome() { // создает мапы  доходов и расходов по месяцам.И !примитивы(за все месяца)!
             for (DataYear data : datas) {
                 if (data.is_expense == false) {
                     incomeInYear.put(data.month, data.amount);
@@ -40,11 +48,23 @@ public class YearlyReport {
                     expense += data.amount;
                 }
             }
-
             return 0;
         }
 
-        static void getMaxIncomeMonth(){
+        static int profitByMonths(){  // Создает мапу по доходу за год и сразу печатает ее.
+      for(int i = 1; i <= expenseInYear.size() ; i++){
+          Integer profit = incomeInYear.get(i) - expenseInYear.get(i);
+          profitInYear.put(i, profit);
+          System.out.println("Прибыль в " + months[i - 1] + " составила " + profit + " !");
+      }
+      return 0;
+        }
+}
+
+
+
+       /* увлекся лишним не посмотрев тз до конца.
+       static void getMaxIncomeMonth(){    !!!поиск самого доходного месяца!!!
 
            Integer maxIncomeMoth = 0;
            Integer maxAmount = 0 ;
@@ -57,7 +77,8 @@ public class YearlyReport {
                     }
             System.out.println("Месяц с самым большим доходом: " + months[maxIncomeMoth - 1]);
             }
-        static void maxExpenseMonth(){
+
+        static void maxExpenseMonth(){  !!!Поиск месяца с самым большим расходом!!!
 
             Integer maxExpenseMoth = 0;
             Integer maxAmount = 0 ;
@@ -69,19 +90,9 @@ public class YearlyReport {
                 }
             }
             System.out.println("Месяц с самым большим расходом: " + months[maxExpenseMoth - 1]);
-        }
+        }*/
 
 
 
 
-        public String readFileContents (String path){
-            try {
-                System.out.println("Файл удачно считан.");
-                return Files.readString(Path.of(path));
-            } catch (IOException e) {
-                System.out.println("Невозможно прочитать файл с месячным отчётом. Возможно файл не находится в нужной директории.");
-                return null;
-            }
-        }
-    }
 

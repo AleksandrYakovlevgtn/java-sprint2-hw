@@ -33,18 +33,12 @@ public class Main {
 
             }
             else if (command.equals("5")) {
-                if(!YearlyReport.datas.isEmpty()) {
-                    YearlyReport.DetailsExpenseIncome();
-                    System.out.println();
-                    System.out.println("Доходы за год составили: " + YearlyReport.income);
-                    System.out.println("Доходы по месяцам: " + YearlyReport.incomeInYear);
-                    System.out.println("Расходы за год составили:" + YearlyReport.expense);
-                    System.out.println("Расходы по месяцам: " + YearlyReport.expenseInYear);
-                    System.out.println("Средний доход за месяц равен: " + YearlyReport.income / 12);
-                    System.out.println("Средний расход за месяц равен: " + YearlyReport.expense / 12);
-                    YearlyReport.getMaxIncomeMonth();
-                    YearlyReport.maxExpenseMonth();
-                    System.out.println();
+                if(!YearlyReport.datas.isEmpty()) { // проверяет был ли выполнен пункт  меню 2 через проверку пустоты таблицы.
+                    YearlyReport.DetailsExpenseIncome(); // создает мапы  доходов и расходов по месяцам.И !примитивы(за все месяца)!
+                    System.out.println("Отчет за 2021 год.");
+                    System.out.println("Средний расход за месяц равен: " + YearlyReport.expense / 12); // доход деленый на 12
+                    System.out.println("Средний доход за месяц равен: " + YearlyReport.income / 12);   // расход деленный на 12
+                    YearlyReport.profitByMonths(); // Создает мапу по доходу за год и сразу печатает ее.
                 }else{
                     System.out.println("Таблица не считано! Пожалуйста сначало выполните 2 команду. ");
                 }
