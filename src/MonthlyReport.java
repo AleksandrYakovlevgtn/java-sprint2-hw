@@ -1,10 +1,7 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 
 public class MonthlyReport {
@@ -15,6 +12,8 @@ public class MonthlyReport {
     public static HashMap<Integer,Integer> expenseInMonth = new HashMap<>();   //  Мапа с расходами по месяцам
     public static HashMap<Integer,HashMap> maxIncomeItemNameInMonth = new HashMap<>();
     public static HashMap<Integer,HashMap> maxExpenseItemNameInMonth = new HashMap<>();
+    public static HashMap<String,Integer> ItemName = new HashMap<>();
+    public static HashMap<Integer,HashMap> ItemNameInMonth = new HashMap<>();
 
 
     public String readFileContents(String path) {
@@ -34,32 +33,41 @@ public class MonthlyReport {
             for (int i = 1; i < lines.length; i++) {
                 String line = lines[i];
                 String[] parts = line.split(",");
-                String item_name = parts[1];
+                String item_name = parts[0];
                 Boolean is_expenseMonth = Boolean.parseBoolean(parts[1]);
                 Integer quantity = Integer.parseInt(parts[2]);
                 Integer sum_of_one = Integer.parseInt(parts[3]);
 
                 DataMonth dataMonth = new DataMonth(item_name, is_expenseMonth, quantity, sum_of_one);
                 dataMonths.add(dataMonth);
+                maxIncomeItemNameInMonth(j);
+
 
                 if (is_expenseMonth == false ){
                     incomeByMonth.put(j,dataMonths);
                     Integer income = 0;
                     income = income + (sum_of_one * quantity);
-                    incomeInMonth.put(j,income);
+                    incomeInMonth.put(j,incomeInMonth.getOrDefault(j,0) + income);
+                    //ItemName.put( item_name , (sum_of_one * quantity));
+                    //ItemNameInMonth.put( j,ItemName);
+
                 }
                 else {
                     expenseByMonth.put(j,dataMonths);
                     Integer expense = 0;
                     expense = expense + (sum_of_one * quantity);
-                    expenseInMonth.put(j,expense);
+                    expenseInMonth.put(j,expenseInMonth.getOrDefault(j,0) + expense);
                 }
             }
         }
     }
-    void maxIncomeItemNameInMonth(){
-        for()
-
+    static void maxIncomeItemNameInMonth(int i){
+        for (DataMonth data : dataMonths){
+            ItemName.put(data.item_name, (data.sum_of_one * data.quantity));
+            ItemNameInMonth.put(i,);
+            ItemName.clear();
+            }
     }
 }
+
 
