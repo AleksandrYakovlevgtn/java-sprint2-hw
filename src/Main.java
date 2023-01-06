@@ -19,9 +19,8 @@ public class Main {
             String command = scanner.next();
             if (command.equals("1")) {
                 MonthlyReport monthlyReport = new MonthlyReport();
-                for (int i = 1; i < 4; i++) {
-                    monthlyReport.loudFile(path + i + ".csv");
-                }
+                monthlyReport.loudFile(path);
+
                 System.out.println("Файлы удачно считались.");
             }
             else if (command.equals("2")) {
@@ -31,7 +30,7 @@ public class Main {
 
             }
             else if (command.equals("4")) {
-                System.out.println(MonthlyReport.dohod.get(1));
+                System.out.println(MonthlyReport.incomeByMonth.get(1));
             }
             else if (command.equals("5")) {
                 if(!YearlyReport.datas.isEmpty()) { // проверяет был ли выполнен пункт  меню 2 через проверку пустоты таблицы.
