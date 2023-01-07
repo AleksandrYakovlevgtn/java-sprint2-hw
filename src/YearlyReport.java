@@ -37,8 +37,10 @@ public class YearlyReport {
             datas.add(data);
         }
     }
-
-        static int DetailsExpenseIncome() { // создает мапы  доходов и расходов по месяцам.И !примитивы(за все месяца)!
+        /*
+        создает мапы  доходов и расходов по месяцам.И !примитивы(за все месяца)!
+       */
+        static int DetailsExpenseIncome() {
             for (DataYear data : datas) {
                 if (data.is_expense == false) {
                     incomeInYear.put(data.month, data.amount);
@@ -50,7 +52,9 @@ public class YearlyReport {
             }
             return 0;
         }
-
+        /*
+    Метод считает и печатает прибыль по месяцам.
+     */
         static int profitByMonths(){  // Создает мапу по доходу за год и сразу печатает ее.
          for(int i = 1; i <= expenseInYear.size() ; i++){
           Integer profit = incomeInYear.get(i) - expenseInYear.get(i);
@@ -59,6 +63,9 @@ public class YearlyReport {
       }
       return 0;
     }
+    /*
+    Метод печати отчета за год.
+     */
     static void Account(){
         if(!datas.isEmpty()) { // проверяет был ли выполнен пункт  меню 2 через проверку пустоты таблицы.
             DetailsExpenseIncome(); // создает мапы  доходов и расходов по месяцам.И !примитивы(за все месяца)!

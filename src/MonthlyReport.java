@@ -11,8 +11,8 @@ public class MonthlyReport {
     public static HashMap<Integer, ArrayList> expenseByMonth = new HashMap<>(); //  Мапа с данными по расходами за все месяца
     public static HashMap<Integer, Integer> incomeInMonth = new HashMap<>();    //  Мапа с доходами по месяцам
     public static HashMap<Integer, Integer> expenseInMonth = new HashMap<>();   //  Мапа с расходами по месяцам
-    public static HashMap<Integer, ArrayList> maxIncomeItemNameInMonth = new HashMap<>();
-    public static ArrayList<String> maxIncomeItemNameInMonth1;
+    public static HashMap<Integer, ArrayList> maxIncomeItemNameInMonth = new HashMap<>(); // Мапа с самыми прибыльными товарами по месяцам
+    public static ArrayList<String> maxIncomeItemNameInMonth1;   // Списки с самыми прибыльными товарами по месяцам
     public static ArrayList<String> maxIncomeItemNameInMonth2;
     public static ArrayList<String> maxIncomeItemNameInMonth3;
 
@@ -28,8 +28,8 @@ public class MonthlyReport {
         maxIncomeItemNameInMonth3.add("0");
     }
 
-    public static HashMap<Integer, ArrayList> maxExpenseItemNameInMonth = new HashMap<>();
-    public static ArrayList<String> maxExpenseItemNameInMonth1;
+    public static HashMap<Integer, ArrayList> maxExpenseItemNameInMonth = new HashMap<>();  // Мапа с самыми расходными товарами по месяцам
+    public static ArrayList<String> maxExpenseItemNameInMonth1;   // Списки с самыми расходными товарами по месяцам
     public static ArrayList<String> maxExpenseItemNameInMonth2;
     public static ArrayList<String> maxExpenseItemNameInMonth3;
 
@@ -46,7 +46,9 @@ public class MonthlyReport {
     }
 
 
-
+/*
+Считываем файлы
+ */
 
     public String readFileContents(String path) {
         try {
@@ -57,7 +59,9 @@ public class MonthlyReport {
         }
     }
 
-
+    /*
+Читаем по сторокам и заносим в нужные мапы и списки.
+     */
     void loudFile(String path) {
         for (int j = 1; j <= availableMonthsCount; j++) {
             String content = readFileContents(path + j + ".csv");
@@ -72,7 +76,9 @@ public class MonthlyReport {
 
                 DataMonth dataMonth = new DataMonth(item_name, is_expenseMonth, quantity, sum_of_one);
                 dataMonths.add(dataMonth);
-
+                /*
+Заносим в даходные мапы и списки
+                 */
 
                 if (is_expenseMonth == false) {
                     incomeByMonth.put(j, dataMonths);
@@ -80,6 +86,9 @@ public class MonthlyReport {
                     income = income + (sum_of_one * quantity);
                     incomeInMonth.put(j, incomeInMonth.getOrDefault(j, 0) + income);
                     maxIncomeItemNameInMonth(j, item_name, quantity, sum_of_one);
+                    /*
+Заносим в расходные мапы и списки
+                     */
                 } else {
                     expenseByMonth.put(j, dataMonths);
                     Integer expense = 0;
@@ -90,7 +99,9 @@ public class MonthlyReport {
             }
         }
     }
-
+    /*
+Находим самые доходные товары по месяцам и разносим их в список затем в мапу по с ключем "месяц"
+     */
     static void maxIncomeItemNameInMonth(int i, String name, int sum_of_one, int quantity) {
         if (i == 1) {
             if ((sum_of_one * quantity) > Integer.parseInt(maxIncomeItemNameInMonth1.get(1))) {
@@ -117,6 +128,9 @@ public class MonthlyReport {
             }
         }
     }
+    /*
+Находим имя самого расходного товара и кладем в списки и затем в мапу с ключем "месяц"
+     */
     static void maxExpenseItemNameInMonth(int i, String name, int sum_of_one, int quantity) {
         if (i == 1) {
             if ((sum_of_one * quantity) > Integer.parseInt(maxExpenseItemNameInMonth1.get(1))) {
@@ -143,6 +157,9 @@ public class MonthlyReport {
             }
         }
     }
+    /*
+Метод для печати отчета
+     */
     static void Account(){
         if(!maxExpenseItemNameInMonth.isEmpty()) {
             for (int i = 1; i <= availableMonthsCount; i++) {
