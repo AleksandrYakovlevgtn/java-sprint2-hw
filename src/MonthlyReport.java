@@ -5,15 +5,47 @@ import java.util.*;
 
 
 public class MonthlyReport {
+    public static int availableMonthsCount = 3;
     public static ArrayList<DataMonth> dataMonths = new ArrayList<>();         // Список с данными за все месяца
-    public static HashMap<Integer,ArrayList> incomeByMonth = new HashMap<>();  //  Мапа с данными по даходам за все месяца
-    public static HashMap<Integer,ArrayList> expenseByMonth = new HashMap<>(); //  Мапа с данными по расходами за все месяца
-    public static HashMap<Integer,Integer> incomeInMonth = new HashMap<>();    //  Мапа с доходами по месяцам
-    public static HashMap<Integer,Integer> expenseInMonth = new HashMap<>();   //  Мапа с расходами по месяцам
-    public static HashMap<Integer,HashMap> maxIncomeItemNameInMonth = new HashMap<>();
-    public static HashMap<Integer,HashMap> maxExpenseItemNameInMonth = new HashMap<>();
-    public static HashMap<String,Integer> ItemName = new HashMap<>();
-    public static HashMap<Integer,HashMap> ItemNameInMonth = new HashMap<>();
+    public static HashMap<Integer, ArrayList> incomeByMonth = new HashMap<>();  //  Мапа с данными по даходам за все месяца
+    public static HashMap<Integer, ArrayList> expenseByMonth = new HashMap<>(); //  Мапа с данными по расходами за все месяца
+    public static HashMap<Integer, Integer> incomeInMonth = new HashMap<>();    //  Мапа с доходами по месяцам
+    public static HashMap<Integer, Integer> expenseInMonth = new HashMap<>();   //  Мапа с расходами по месяцам
+    public static HashMap<Integer, ArrayList> maxIncomeItemNameInMonth = new HashMap<>();
+    public static ArrayList<String> maxIncomeItemNameInMonth1;
+    public static ArrayList<String> maxIncomeItemNameInMonth2;
+    public static ArrayList<String> maxIncomeItemNameInMonth3;
+
+    static {
+        maxIncomeItemNameInMonth1 = new ArrayList<>();
+        maxIncomeItemNameInMonth1.add("0");
+        maxIncomeItemNameInMonth1.add("0");
+        maxIncomeItemNameInMonth2 = new ArrayList<>();
+        maxIncomeItemNameInMonth2.add("0");
+        maxIncomeItemNameInMonth2.add("0");
+        maxIncomeItemNameInMonth3 = new ArrayList<>();
+        maxIncomeItemNameInMonth3.add("0");
+        maxIncomeItemNameInMonth3.add("0");
+    }
+
+    public static HashMap<Integer, ArrayList> maxExpenseItemNameInMonth = new HashMap<>();
+    public static ArrayList<String> maxExpenseItemNameInMonth1;
+    public static ArrayList<String> maxExpenseItemNameInMonth2;
+    public static ArrayList<String> maxExpenseItemNameInMonth3;
+
+    static {
+        maxExpenseItemNameInMonth1 = new ArrayList<>();
+        maxExpenseItemNameInMonth1.add("0");
+        maxExpenseItemNameInMonth1.add("0");
+        maxExpenseItemNameInMonth2 = new ArrayList<>();
+        maxExpenseItemNameInMonth2.add("0");
+        maxExpenseItemNameInMonth2.add("0");
+        maxExpenseItemNameInMonth3 = new ArrayList<>();
+        maxExpenseItemNameInMonth3.add("0");
+        maxExpenseItemNameInMonth3.add("0");
+    }
+
+
 
 
     public String readFileContents(String path) {
@@ -26,8 +58,8 @@ public class MonthlyReport {
     }
 
 
-    void  loudFile(String path) {
-        for (int j = 1; j < 4; j++) {
+    void loudFile(String path) {
+        for (int j = 1; j <= availableMonthsCount; j++) {
             String content = readFileContents(path + j + ".csv");
             String[] lines = content.split("\r?\n");
             for (int i = 1; i < lines.length; i++) {
@@ -40,34 +72,90 @@ public class MonthlyReport {
 
                 DataMonth dataMonth = new DataMonth(item_name, is_expenseMonth, quantity, sum_of_one);
                 dataMonths.add(dataMonth);
-                maxIncomeItemNameInMonth(j);
 
 
-                if (is_expenseMonth == false ){
-                    incomeByMonth.put(j,dataMonths);
+                if (is_expenseMonth == false) {
+                    incomeByMonth.put(j, dataMonths);
                     Integer income = 0;
                     income = income + (sum_of_one * quantity);
-                    incomeInMonth.put(j,incomeInMonth.getOrDefault(j,0) + income);
-                    //ItemName.put( item_name , (sum_of_one * quantity));
-                    //ItemNameInMonth.put( j,ItemName);
-
-                }
-                else {
-                    expenseByMonth.put(j,dataMonths);
+                    incomeInMonth.put(j, incomeInMonth.getOrDefault(j, 0) + income);
+                    maxIncomeItemNameInMonth(j, item_name, quantity, sum_of_one);
+                } else {
+                    expenseByMonth.put(j, dataMonths);
                     Integer expense = 0;
                     expense = expense + (sum_of_one * quantity);
-                    expenseInMonth.put(j,expenseInMonth.getOrDefault(j,0) + expense);
+                    expenseInMonth.put(j, expenseInMonth.getOrDefault(j, 0) + expense);
+                    maxExpenseItemNameInMonth(j, item_name, quantity, sum_of_one);
                 }
             }
         }
     }
-    static void maxIncomeItemNameInMonth(int i){
-        for (DataMonth data : dataMonths){
-            ItemName.put(data.item_name, (data.sum_of_one * data.quantity));
-            ItemNameInMonth.put(i,);
-            ItemName.clear();
+
+    static void maxIncomeItemNameInMonth(int i, String name, int sum_of_one, int quantity) {
+        if (i == 1) {
+            if ((sum_of_one * quantity) > Integer.parseInt(maxIncomeItemNameInMonth1.get(1))) {
+                maxIncomeItemNameInMonth1.clear();
+                maxIncomeItemNameInMonth1.add(name);
+                maxIncomeItemNameInMonth1.add(String.valueOf((sum_of_one * quantity)));
+                maxIncomeItemNameInMonth.put(i, maxIncomeItemNameInMonth1);
             }
+        }
+        if (i == 2) {
+            if ((sum_of_one * quantity) > Integer.parseInt(maxIncomeItemNameInMonth2.get(1))) {
+                maxIncomeItemNameInMonth2.clear();
+                maxIncomeItemNameInMonth2.add(name);
+                maxIncomeItemNameInMonth2.add(String.valueOf((sum_of_one * quantity)));
+                maxIncomeItemNameInMonth.put(i, maxIncomeItemNameInMonth2);
+            }
+        }
+        if (i == 3) {
+            if ((sum_of_one * quantity) > Integer.parseInt(maxIncomeItemNameInMonth3.get(1))) {
+                maxIncomeItemNameInMonth3.clear();
+                maxIncomeItemNameInMonth3.add(name);
+                maxIncomeItemNameInMonth3.add(String.valueOf((sum_of_one * quantity)));
+                maxIncomeItemNameInMonth.put(i, maxIncomeItemNameInMonth3);
+            }
+        }
+    }
+    static void maxExpenseItemNameInMonth(int i, String name, int sum_of_one, int quantity) {
+        if (i == 1) {
+            if ((sum_of_one * quantity) > Integer.parseInt(maxExpenseItemNameInMonth1.get(1))) {
+                maxExpenseItemNameInMonth1.clear();
+                maxExpenseItemNameInMonth1.add(name);
+                maxExpenseItemNameInMonth1.add(String.valueOf((sum_of_one * quantity)));
+                maxExpenseItemNameInMonth.put(i, maxExpenseItemNameInMonth1);
+            }
+        }
+        if (i == 2) {
+            if ((sum_of_one * quantity) > Integer.parseInt(maxExpenseItemNameInMonth2.get(1))) {
+                maxExpenseItemNameInMonth2.clear();
+                maxExpenseItemNameInMonth2.add(name);
+                maxExpenseItemNameInMonth2.add(String.valueOf((sum_of_one * quantity)));
+                maxExpenseItemNameInMonth.put(i, maxExpenseItemNameInMonth2);
+            }
+        }
+        if (i == 3) {
+            if ((sum_of_one * quantity) > Integer.parseInt(maxExpenseItemNameInMonth3.get(1))) {
+                maxExpenseItemNameInMonth3.clear();
+                maxExpenseItemNameInMonth3.add(name);
+                maxExpenseItemNameInMonth3.add(String.valueOf((sum_of_one * quantity)));
+                maxExpenseItemNameInMonth.put(i, maxExpenseItemNameInMonth3);
+            }
+        }
+    }
+    static void Account(){
+        if(!maxExpenseItemNameInMonth.isEmpty()) {
+            for (int i = 1; i <= availableMonthsCount; i++) {
+                System.out.println(YearlyReport.months[i - 1]);
+                System.out.println("Самый доходный товар в этом месяце " + maxIncomeItemNameInMonth.get(i));
+                System.out.println("Самая большая трата в этом месяце " + maxExpenseItemNameInMonth.get(i));
+            }
+        }else {
+            System.out.println("Сначала необходимо выполнить чтение файлов !");
+        }
     }
 }
+
+
 
 

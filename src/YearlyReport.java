@@ -52,14 +52,27 @@ public class YearlyReport {
         }
 
         static int profitByMonths(){  // Создает мапу по доходу за год и сразу печатает ее.
-      for(int i = 1; i <= expenseInYear.size() ; i++){
+         for(int i = 1; i <= expenseInYear.size() ; i++){
           Integer profit = incomeInYear.get(i) - expenseInYear.get(i);
           profitInYear.put(i, profit);
           System.out.println("Прибыль в " + months[i - 1] + " составила " + profit + " !");
       }
       return 0;
+    }
+    static void Account(){
+        if(!datas.isEmpty()) { // проверяет был ли выполнен пункт  меню 2 через проверку пустоты таблицы.
+            DetailsExpenseIncome(); // создает мапы  доходов и расходов по месяцам.И !примитивы(за все месяца)!
+            System.out.println("Отчет за 2021 год.");
+            System.out.println("Средний расход за месяц равен: " + expense / 12); // доход деленый на 12
+            System.out.println("Средний доход за месяц равен: " + income / 12);   // расход деленный на 12
+            profitByMonths(); // Создает мапу по доходу за год и сразу печатает ее.
+        }else{
+            System.out.println("Таблица не считано! Пожалуйста сначало выполните 2 команду. ");
         }
+    }
 }
+
+
 
 
 

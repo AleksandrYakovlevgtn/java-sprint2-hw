@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 public class Main {
         public static void main(String[] args) {
-
         String path = ("resources/m.20210");
         Scanner scanner = new Scanner(System.in);
 
@@ -21,29 +20,19 @@ public class Main {
             if (command.equals("1")) {
                 MonthlyReport monthlyReport = new MonthlyReport();
                 monthlyReport.loudFile(path);
-                //MonthlyReport.maxIncomeItemNameInMonth();
                 System.out.println("Файлы удачно считались.");
             }
             else if (command.equals("2")) {
                 YearlyReport yearlyReport = new YearlyReport("resources/y.2021.csv");
             }
             else if (command.equals("3")) {
-
+                Checker.check();
             }
             else if (command.equals("4")) {
-                System.out.println(MonthlyReport.ItemName);
-                System.out.println((MonthlyReport.ItemNameInMonth));
+                MonthlyReport.Account();
             }
             else if (command.equals("5")) {
-                if(!YearlyReport.datas.isEmpty()) { // проверяет был ли выполнен пункт  меню 2 через проверку пустоты таблицы.
-                    YearlyReport.DetailsExpenseIncome(); // создает мапы  доходов и расходов по месяцам.И !примитивы(за все месяца)!
-                    System.out.println("Отчет за 2021 год.");
-                    System.out.println("Средний расход за месяц равен: " + YearlyReport.expense / 12); // доход деленый на 12
-                    System.out.println("Средний доход за месяц равен: " + YearlyReport.income / 12);   // расход деленный на 12
-                    YearlyReport.profitByMonths(); // Создает мапу по доходу за год и сразу печатает ее.
-                }else{
-                    System.out.println("Таблица не считано! Пожалуйста сначало выполните 2 команду. ");
-                }
+                YearlyReport.Account();
             }
             else if (command.equals("q")) {
                  break;
