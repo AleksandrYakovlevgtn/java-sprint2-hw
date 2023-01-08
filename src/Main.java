@@ -23,10 +23,10 @@ public class Main {
                 Checker.check();
             }
             else if (command.equals("4")) {
-                MonthlyReport.Account();
+                MonthlyReport.account();
             }
             else if (command.equals("5")) {
-                YearlyReport.Account();
+                YearlyReport.account();
             }
             else if (command.equals("q")) {
                  break;

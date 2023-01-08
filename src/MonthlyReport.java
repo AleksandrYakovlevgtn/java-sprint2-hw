@@ -7,8 +7,6 @@ import java.util.*;
 public class MonthlyReport {
     public static int availableMonthsCount = 3;
     public static ArrayList<DataMonth> dataMonths = new ArrayList<>();         // Список с данными за все месяца
-    public static HashMap<Integer, ArrayList> incomeByMonth = new HashMap<>();  //  Мапа с данными по даходам за все месяца
-    public static HashMap<Integer, ArrayList> expenseByMonth = new HashMap<>(); //  Мапа с данными по расходами за все месяца
     public static HashMap<Integer, Integer> incomeInMonth = new HashMap<>();    //  Мапа с доходами по месяцам
     public static HashMap<Integer, Integer> expenseInMonth = new HashMap<>();   //  Мапа с расходами по месяцам
     public static HashMap<Integer, ArrayList> maxIncomeItemNameInMonth = new HashMap<>(); // Мапа с самыми прибыльными товарами по месяцам
@@ -80,8 +78,7 @@ public class MonthlyReport {
 Заносим в даходные мапы и списки
                  */
 
-                if (is_expenseMonth == false) {
-                    incomeByMonth.put(j, dataMonths);
+                if (!is_expenseMonth) {
                     Integer income = 0;
                     income = income + (sum_of_one * quantity);
                     incomeInMonth.put(j, incomeInMonth.getOrDefault(j, 0) + income);
@@ -90,7 +87,6 @@ public class MonthlyReport {
 Заносим в расходные мапы и списки
                      */
                 } else {
-                    expenseByMonth.put(j, dataMonths);
                     Integer expense = 0;
                     expense = expense + (sum_of_one * quantity);
                     expenseInMonth.put(j, expenseInMonth.getOrDefault(j, 0) + expense);
@@ -160,7 +156,7 @@ public class MonthlyReport {
     /*
 Метод для печати отчета
      */
-    static void Account(){
+    static void account(){
         if(!maxExpenseItemNameInMonth.isEmpty()) {
             for (int i = 1; i <= availableMonthsCount; i++) {
                 System.out.println(YearlyReport.months[i - 1]);
