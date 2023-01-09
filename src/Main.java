@@ -15,6 +15,9 @@ public class Main {
                 MonthlyReport monthlyReport = new MonthlyReport();
                 monthlyReport.loudFile(path);
                 System.out.println("Файлы удачно считались.");
+                //MonthlyReport.Map();
+                System.out.println((MonthlyReport.maxIncomeByMonth) + " " + (MonthlyReport.maxIncomeByMonthName));
+                System.out.println((MonthlyReport.maxExpenseByMonth) + " " + (MonthlyReport.maxExpenseByMonthName));
             }
             else if (command.equals("2")) {
                 YearlyReport yearlyReport = new YearlyReport("resources/y.2021.csv");

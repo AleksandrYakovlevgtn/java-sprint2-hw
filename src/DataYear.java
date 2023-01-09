@@ -5,10 +5,6 @@ public class DataYear {
     public int amount;
     public boolean is_expense;
 
-
-
-
-
     public DataYear(int month, int amount, boolean is_expense) {
         this.month = month;
         this.amount = amount;
