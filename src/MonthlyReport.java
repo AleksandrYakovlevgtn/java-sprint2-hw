@@ -18,21 +18,21 @@ public class MonthlyReport {
 Считываем файлы
  */
 
-    public String readFileContents(String path) {
+    /*public String readFileContents(String path) {
         try {
             return Files.readString(Path.of(path));
         } catch (IOException e) {
             System.out.println("Невозможно прочитать файл с месячным отчётом. Возможно файл не находится в нужной директории.");
             return null;
         }
-    }
+    }*/
 
     /*
 Читаем по сторокам и заносим в нужные мапы и списки.
      */
     void loudFile(String path) {
         for (int j = 1; j <= availableMonthsCount; j++) {
-            String content = readFileContents(path + j + ".csv");
+            String content = readFileContents.readFileContents(path + j + ".csv");
             String[] lines = content.split("\r?\n");
             for (int i = 1; i < lines.length; i++) {
                 String line = lines[i];
@@ -44,7 +44,7 @@ public class MonthlyReport {
 
                 DataMonth dataMonth = new DataMonth(item_name, is_expenseMonth, quantity, sum_of_one);
                 dataMonths.add(dataMonth);
-                TEST(j,item_name,is_expenseMonth,sum_of_one,quantity);
+                maxNameIncomeExpense(j,item_name,is_expenseMonth,sum_of_one,quantity);
                 /*
 Заносим в даходные мапы
                  */
@@ -84,7 +84,7 @@ public class MonthlyReport {
     /*
     Считаем и ищем имя максимальных расходов и доходов.
      */
-    static void TEST(Integer i, String name,Boolean is_expenseMonth, int sum_of_one, int quantity){
+    static void maxNameIncomeExpense(Integer i, String name,Boolean is_expenseMonth, int sum_of_one, int quantity){
         if (maxIncomeByMonth.isEmpty() || maxExpenseByMonth.isEmpty()){
             for (int j = 1;j <= availableMonthsCount; j++ ) {
                 maxIncomeByMonth.put(j, 0);

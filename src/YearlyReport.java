@@ -42,7 +42,7 @@ public class YearlyReport {
        */
         static void detailsExpenseIncome() {
             for (DataYear data : datas) {
-                if (!data.is_expense ) {
+                if (!data.isExpense ) {
                     incomeInYear.put(data.month, data.amount);
                     income += data.amount;
                 } else {

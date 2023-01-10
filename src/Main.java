@@ -3,11 +3,8 @@ import java.util.Scanner;
 
 public class Main {
         public static void main(String[] args) {
-        String path = ("resources/m.20210");
+        String path = "resources/m.20210";
         Scanner scanner = new Scanner(System.in);
-
-
-
         while (true) {
             printMenu();
             String command = scanner.next();
@@ -36,11 +33,6 @@ public class Main {
             }
         }
     }
-
-
-
-
-
     public static void printMenu (){
             System.out.println("Что вы хотите сделать? ");
             System.out.println("1 - Считать все месячные отчёты");
