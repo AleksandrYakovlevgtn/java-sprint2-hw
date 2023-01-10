@@ -11,20 +11,8 @@ public class YearlyReport {
     public static HashMap<Integer, Integer> profitInYear = new HashMap<>();  // мапа с прибылью, ключ это месяц числом.
     public static int income;  // доход за весь год.
     public static int expense; // расход за весь год.
-
-    public String readFileContents (String path){  // считываем файл.
-        try {
-            System.out.println("Файл удачно считан.");
-            return Files.readString(Path.of(path));
-        } catch (IOException e) {
-            System.out.println("Невозможно прочитать файл с месячным отчётом. Возможно файл не находится в нужной директории.");
-            return null;
-        }
-    }
-
-
     public YearlyReport(String path) {    // читаем по линиям и упоковываем в список.
-        String content = readFileContents(path);
+        String content = ReadFileContents.readFileContents(path);
         String[] lines = content.split("\r?\n");
         for (int i = 1; i < lines.length; i++) {
             String line = lines[i];

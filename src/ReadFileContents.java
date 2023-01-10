@@ -3,7 +3,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 
-public class readFileContents {
+public class ReadFileContents {
     public static String readFileContents(String path) {
         try {
             return Files.readString(Path.of(path));

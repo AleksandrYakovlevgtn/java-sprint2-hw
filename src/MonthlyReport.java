@@ -32,7 +32,7 @@ public class MonthlyReport {
      */
     void loudFile(String path) {
         for (int j = 1; j <= availableMonthsCount; j++) {
-            String content = readFileContents.readFileContents(path + j + ".csv");
+            String content = ReadFileContents.readFileContents(path + j + ".csv");
             String[] lines = content.split("\r?\n");
             for (int i = 1; i < lines.length; i++) {
                 String line = lines[i];
